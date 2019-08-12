@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>URL Shortener</title>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" />
+</head>
+
+<body>
+    <div class="container">
+        <div class="row mt-3">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-10 text-center">
+                <h1>Django URL Shortener</h1>
+            </div>
+        </div>
+        <div class="row mt-3 ">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-10 text-center">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" placeholder="https://www.example.com" name="url" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Short it!</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
