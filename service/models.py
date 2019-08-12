@@ -8,6 +8,7 @@ class UrlModel(models.Model):
     """
     slug = models.SlugField(unique=True)
     url = models.TextField(null=False)
+    short_url = models.TextField(null=True)
 
     def __str__(self):
         return sel.slug
