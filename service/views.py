@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, authentication_classes
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.permissions import AllowAny
 from . import models
 from . import serializers
 import string
@@ -16,14 +17,18 @@ def home_view(request):
 
 
 @api_view(['POST'])
+@authentication_classes([AllowAny])
 def url_shortener_view(request):
-    # the URL entered by the User
-    users_url = request.data['url']
+    try:
+        # the URL entered by the User
+        users_url = request.data['url']
 
-    # Gets the shortened record and serialize it
-    service = shorten_url(users_url)
-    service_serializer = serializers.ServiceSerializer(service, many=False)
-    return Response(data={'success': True, 'data': service_serializer.data}, status=status.HTTP_201_CREATED)
+        # Gets the shortened record and serialize it
+        service = shorten_url(users_url)
+        service_serializer = serializers.ServiceSerializer(service, many=False)
+        return Response(data={'success': True, 'data': service_serializer.data}, status=status.HTTP_201_CREATED)
+    except Exception as e:
+        return Response(data={'success': False, 'message': f'{str(e)}'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 def generate_random_string(string_length=6):
