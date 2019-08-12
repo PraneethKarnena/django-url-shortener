@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
+from django.http import HttpResponseRedirect
 from rest_framework.decorators import api_view, authentication_classes
 from rest_framework.response import Response
 from rest_framework import status
@@ -16,8 +17,18 @@ def home_view(request):
     return render(request, 'service/home.html')
 
 
+@require_http_methods(['GET'])
+def redirector_view(request, slug):
+    # Redirect short URL to its original URL, if it's valid
+    try:
+        service = models.UrlModel.objects.get(slug=slug)
+        return HttpResponseRedirect(service.url)
+    except Exception as e:
+        return HttpResponseRedirect('/')
+
+
 @api_view(['POST'])
-def url_shortener_view(request):
+def url_shortener_api(request):
     try:
         # the URL entered by the User
         users_url = request.data['url']
