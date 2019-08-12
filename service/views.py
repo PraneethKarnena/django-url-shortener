@@ -17,7 +17,6 @@ def home_view(request):
 
 
 @api_view(['POST'])
-@authentication_classes([AllowAny])
 def url_shortener_view(request):
     try:
         # the URL entered by the User
