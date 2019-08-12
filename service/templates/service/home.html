@@ -25,7 +25,8 @@
                 <form action="" method="post">
                     {% csrf_token %}
                     <div class="form-group">
-                        <input id="url" type="text" placeholder="https://www.example.com" name="url" class="form-control" required>
+                        <input id="url" type="text" placeholder="https://www.example.com" name="url"
+                            class="form-control" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Short it!</button>
                 </form>
@@ -37,25 +38,43 @@
                 <div id="short-link"></div>
             </div>
         </div>
+        <div class="row mt-3">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8">
+                <h3>API:</h3>
+                    URL: <code>https://url-shortener-drf.herokuapp.comapi/shorten-url/</code>
+                    <br>
+                    Method: <code>POST</code>
+                    <br>
+                    Body:</p>
+
+                <pre><code class="json language-json">
+{
+url: 'https://www.google.com/'
+}
+                    </code>
+                </pre>
+            </div>
+        </div>
     </div>
     <script>
-    $('document').ready(function() {
-        $('form').submit(function(e) {
-            e.preventDefault();
-            var url = $('#url').val();
-            $.ajax({
-                method: "POST",
-                url: "{% url 'url_shortener_api' %}",
-                data: { url: url }
-            })
-            .done(function(resp){
-                var shortUrl = resp['data']['short_url'];
-                console.log(shortUrl);
-                var shortHtml = `<a href="${shortUrl}" target="_blank">${shortUrl}</a>`;
-                $('#short-link').html(shortHtml);
+        $('document').ready(function () {
+            $('form').submit(function (e) {
+                e.preventDefault();
+                var url = $('#url').val();
+                $.ajax({
+                    method: "POST",
+                    url: "{% url 'url_shortener_api' %}",
+                    data: { url: url }
+                })
+                    .done(function (resp) {
+                        var shortUrl = resp['data']['short_url'];
+                        console.log(shortUrl);
+                        var shortHtml = `<a href="${shortUrl}" target="_blank">${shortUrl}</a>`;
+                        $('#short-link').html(shortHtml);
+                    });
             });
         });
-    });
     </script>
 </body>
 
