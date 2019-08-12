@@ -3,5 +3,7 @@ from . import views
 
 urlpatterns = [
     path('', views.home_view),
-    path('api/shorten-url/', views.url_shortener_view, name='url_shortener_api'),
+    path('api/shorten-url/', views.url_shortener_api, name='url_shortener_api'),
+    path('api/shorten-url', views.url_shortener_api, name='url_shortener_api'),
+    path('l/<slug:slug>/', views.redirector_view),
 ]
