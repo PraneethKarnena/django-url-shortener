@@ -23,7 +23,8 @@ def url_shortener_view(request):
         users_url = request.data['url']
 
         # Gets the shortened record and serialize it
-        service = shorten_url(users_url)
+        domain = request.META['HTTP_HOST']
+        service = shorten_url(users_url, domain)
         service_serializer = serializers.ServiceSerializer(service, many=False)
         return Response(data={'success': True, 'data': service_serializer.data}, status=status.HTTP_201_CREATED)
     except Exception as e:
@@ -39,13 +40,15 @@ def generate_random_string(string_length=6):
     return random_string
 
 
-def shorten_url(url):
+def shorten_url(url, domain):
     # Gets a random string and validates it against the database
     random_string = generate_random_string()
     service, created = models.UrlModel.objects.get_or_create(slug=random_string)
     if created:
         service.url = url
+        short_url = f'http://{domain}/l/{random_string}/'
+        service.short_url = short_url
         service.save()
         return service
     else:
-        shorten_url(url)
+        shorten_url(url, domain)
