@@ -17,13 +17,13 @@ Body:
 
 ```json
 {
-url: 'https://www.google.com/'
+"url": "https://www.google.com/"
 }
 ```
 
 **Run:**
 
  - Clone the project
- - Do `pip install requirements.txt` and `cd <project-folder>`
+ - Do `cd <project-folder>` and `pip install requirements.txt` 
  - Run `python manage.py makemigrations` and `python manage.py migrate`
  - Deploy test server: `python manage.py runserver` 
