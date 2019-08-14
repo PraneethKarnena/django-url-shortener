@@ -11,7 +11,7 @@ An API service for shortening links programmatically.
 **Demo:** [https://url-shortener-drf.herokuapp.com/](https://url-shortener-drf.herokuapp.com/)
 
 **API:**
-URL: `https://url-shortener-drf.herokuapp.comapi/shorten-url/`
+URL: `https://url-shortener-drf.herokuapp.com/api/shorten-url/`
 Method: `POST`
 Body:
 
