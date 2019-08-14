@@ -25,7 +25,7 @@ def redirector_view(request, slug):
         url = service.url
         if not url.startswith('http://') and not url.startswith('https://'):
             url = f'http://{url}'
-        return HttpResponseRedirect(service.url)
+        return HttpResponseRedirect(url)
     except Exception as e:
         return HttpResponseRedirect('/')
 
