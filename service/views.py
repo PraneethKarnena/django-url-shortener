@@ -22,6 +22,9 @@ def redirector_view(request, slug):
     # Redirect short URL to its original URL, if it's valid
     try:
         service = models.UrlModel.objects.get(slug=slug)
+        url = service.url
+        if not url.startswith('http://') and not url.startswith('https://'):
+            url = f'http://{url}'
         return HttpResponseRedirect(service.url)
     except Exception as e:
         return HttpResponseRedirect('/')
