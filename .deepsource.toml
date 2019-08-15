@@ -1,1 +1,6 @@
-https://raw.githubusercontent.com/PraneethKarnena/django-scraping-api/master/.deepsource.toml
+version = 1
+
+[[analyzers]]
+name = "python"
+enabled = true
+runtime_version = "3.x.x"
